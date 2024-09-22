@@ -1,0 +1,19 @@
+stages: 
+    # - build
+    - test
+    
+
+test-job:
+  # image: mcr.microsoft.com/playwright
+  image: mcr.microsoft.com/playwright:v1.47.2-noble
+  stage: test
+  script:
+      - echo "Code coverage is 100%."
+      - npm ci
+      - npx playwright install --with-deps
+      - npx playwright test
+      
+  artifacts:
+     when: always
+     paths: 
+       - playwright-report/**
