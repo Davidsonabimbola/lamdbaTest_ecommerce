@@ -68,7 +68,12 @@ test('TC_001 sign up functionality', async ({ page }) => {
 
     //shop for order
    await page.getByRole('button', { name:mode_ofShopping }).click()
-   await page.getByRole('link', { name: productCategory }).click()
+
+   const list_ofItems = await page.locator('[class="nav-item"]')
+   const product_Info = await page.locator('[class="info"]')
+   const itemPick =product_Info.locator('[class="title"]').filter({hasText:productCategory})
+   const itemLocate = await list_ofItems.filter({has:itemPick})
+   await itemLocate.locator('a').click()
 
    //await expect(await page.locator('[id="product-category"]')).toBeTruthy()
 
@@ -135,12 +140,14 @@ test('TC_001 sign up functionality', async ({ page }) => {
 
 
    // await expect(await page.locator('[class="table table-bordered table-hover mb-0"]')).toBeVisible()
-    await page.getByRole('button', {name:'Confirm Order '}).click()
+    await page.getByRole('button', {name:'Confirm Order'}).click()
 
 //final page message
     const final_orderPage = await page.locator('[id="content"]')
-    const order_paragraphMessage = final_orderPage.locator('[class="page-title my-3"]').textContent()
-    console.log(await order_paragraphMessage)
+    const order_paragraphMessage = final_orderPage.locator('[class="page-title my-3"]')
+    await order_paragraphMessage.isVisible()
+    await order_paragraphMessage.textContent()
+    console.log(await order_paragraphMessage.textContent())
 
     await expect(final_orderPage.locator('p').nth(1)).toContainText('Your order has been successfully processed!')
     await page.locator('[class="buttons mb-4"]').getByRole('link', {name:'Continue'}).click()
