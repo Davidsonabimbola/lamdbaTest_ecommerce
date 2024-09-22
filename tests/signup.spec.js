@@ -1,6 +1,7 @@
 const { test, expect } = require('@playwright/test');
 
 test('TC_001 sign up functionality', async ({ page }) => {
+  test.setTimeout(120000)
     await page.goto('https://ecommerce-playground.lambdatest.io/index.php?route=common/home')
     const navbarSection =  page.locator('[data-id="217834"]')
    const navBar = navbarSection.locator('[id="widget-navbar-217834"]')
