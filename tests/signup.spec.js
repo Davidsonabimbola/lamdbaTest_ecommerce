@@ -34,7 +34,7 @@ test('TC_001 sign up functionality', async ({ page }) => {
 
 
 
-  test.only('TC_002 login functionality',{tag:'@smoke'},async({page})=>{
+  test('TC_002 login functionality',{tag:'@smoke'},async({page})=>{
     test.setTimeout(200000)
     var userEmail = 'nosmuselavo_049@yahoo.com'
     var userPassword = 'Vanmuster.007'
